@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const {initializeDatabase} = require("./config/DB")
+
 
 
 class Server {
@@ -9,15 +9,14 @@ class Server {
     dotenv.config({ path: "./.env" });
 
    
-    this.port = process.env.HOST_PUERTO || 8000;
+    this.port = process.env.HOST_PUERTO ;
 
     this.listen();
   }
 
 
 
-  listen() {
-    initializeDatabase()
+   async listen() {
     this.app.listen(this.port, () => {
       console.log(`Conectado en el puerto: ${this.port}`);
     });
