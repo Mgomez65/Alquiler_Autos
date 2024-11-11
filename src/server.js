@@ -1,27 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+
+this.port = process.env.HOST_PUERTO ;
+
+app = express();
+app.use(express.json())
 
 
 
-class Server {
-  constructor() {
-    this.app = express();
-    dotenv.config({ path: "./.env" });
+app.use("/",require("./routers/auth.routes"))
 
+
+app.listen(this.port, () => {
+  console.log(`Conectado en el puerto: ${this.port}`);
+});
+    
    
-    this.port = process.env.HOST_PUERTO ;
-
-    this.listen();
-  }
-
-
-
-   async listen() {
-    this.app.listen(this.port, () => {
-      console.log(`Conectado en el puerto: ${this.port}`);
-    });
-  }
-}
-
-
-new Server();
