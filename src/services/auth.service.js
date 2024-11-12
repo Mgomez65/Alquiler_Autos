@@ -6,13 +6,20 @@ const prisma = new PrismaClient()
 
 exports.getUsers = () => { }
 
-exports.getUserID = (column, valor) => {
-    return prisma.user.findMany(
+exports.getUserID = async (column, valor) => {
+    try{
+        const usuario = await prisma.user.findMany(
         {
             where: { [column]: valor }
 
         })
-}
+        return usuario.length > 0 
+    } catch (error) {
+        console.log(error);
+        return null; 
+    }
+};
+
 
 exports.CreateUser = async (data, passhash) => {
     try {
@@ -23,7 +30,7 @@ exports.CreateUser = async (data, passhash) => {
                 password: passhash
             }
         })
-        return nuevoUsuario
+        return nuevoUsuario 
     } catch (error) {
         console.error("Error al consultar el usuario:", error);
         throw error;
