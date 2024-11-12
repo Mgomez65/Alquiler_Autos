@@ -1,12 +1,19 @@
-const exprres = require("express")
-const dotenv = require("dotenv")
+const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+
+this.port = process.env.HOST_PUERTO ;
+
+app = express();
+app.use(express.json())
 
 
 
-dotenv.config({path: "./.env"})
-port = process.env.HOST_PUERTO || 8000
-app = exprres()
-app.listen(port,(req,res)=> {
-    console.log("conecatodo en: "+ port)
+app.use("/",require("./routers/auth.routes"))
+
+
+app.listen(this.port, () => {
+  console.log(`Conectado en el puerto: ${this.port}`);
+});
     
-})
+   
